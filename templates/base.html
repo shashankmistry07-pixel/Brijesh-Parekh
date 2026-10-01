@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Brijesh Parekh | Playback Singer & Live Performer{% endblock %}</title>
+  <meta name="description" content="Official website of Brijesh Parekh - Sensational Playback Singer and Performer with 4000+ shows across Garba, Bollywood Orchestra, Wedding Lagangeet, and International Concert Tours.">
+  <meta name="keywords" content="Brijesh Parekh, Singer Brijesh Parekh, Gujarati Singer, Playback Singer, Garba Singer, Navratri Garba, Bollywood Orchestra, Lagangeet, Ahmedabad Singer">
+  
+  <!-- FontAwesome & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Sticky Glass Navbar -->
+  <header class="navbar-header">
+    <div class="container nav-container">
+      <a href="{% url 'home' %}" class="logo-brand">
+        <img src="{% static 'pics/alb61-removebg-preview.png' %}" alt="Brijesh Parekh Singer" onerror="this.src='{% static 'pics/solo3.jpg' %}'">
+        <div>
+          <div class="brand-title gold-text">Brijesh Parekh</div>
+          <div class="brand-subtitle">Playback Singer & Performer</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+        <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' or request.resolver_match.url_name == 'profile' %}active{% endif %}">About & Profile</a>
+        <a href="{% url 'services' %}" class="{% if request.resolver_match.url_name == 'services' or request.resolver_match.url_name == 'category_detail' %}active{% endif %}">Performances</a>
+        <a href="{% url 'gallery' %}" class="{% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">Gallery</a>
+        <a href="{% url 'music' %}" class="{% if request.resolver_match.url_name == 'music' %}active{% endif %}">Music</a>
+        <a href="{% url 'events' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Shows & Events</a>
+        <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="tel:{{ singer_profile.phone_primary }}" class="btn-primary btn-call" title="Call Brijesh Parekh">
+          <i class="fa-solid fa-phone"></i> <span>{{ singer_profile.phone_primary }}</span>
+        </a>
+        <div class="mobile-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Django Messages Container -->
+  {% if messages %}
+    <div class="container" style="margin-top: calc(var(--navbar-height) + 1rem); z-index: 10;">
+      {% for message in messages %}
+        <div class="alert-toast {{ message.tags }}">
+          <i class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% else %}fa-circle-exclamation{% endif %}"></i>
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Main Content Block -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Sticky Bottom Music Player Bar -->
+  <div class="sticky-music-bar">
+    <div class="bar-container">
+      <div class="now-playing-info">
+        <img id="nowPlayingCover" src="{% static 'pics/solo3.jpg' %}" alt="Song Cover">
+        <div class="now-playing-text">
+          <h4 id="nowPlayingTitle">Ranglo Non-Stop Garba</h4>
+          <p id="nowPlayingSub">Brijesh Parekh Live</p>
+        </div>
+      </div>
+
+      <div class="player-controls">
+        <div class="control-buttons">
+          <button class="btn-player"><i class="fa-solid fa-backward-step"></i></button>
+          <button class="btn-player btn-play-main" id="mainPlayBtn"><i class="fa-solid fa-play"></i></button>
+          <button class="btn-player"><i class="fa-solid fa-forward-step"></i></button>
+        </div>
+        <div class="progress-container">
+          <span class="time-stamp" id="currentTime">0:00</span>
+          <div class="progress-bar" id="playerProgressBar">
+            <div class="progress-fill" id="playerProgressFill"></div>
+          </div>
+          <span class="time-stamp" id="totalTime">0:00</span>
+        </div>
+      </div>
+
+      <div style="text-align: right; display: flex; align-items: center; justify-content: flex-end; gap: 1rem;">
+        <a href="{% url 'music' %}" class="btn-secondary" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
+          <i class="fa-solid fa-music"></i> All Songs
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="Gallery Preview">
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="logo-brand">
+          <div>
+            <div class="brand-title gold-text">Brijesh Parekh</div>
+            <div class="brand-subtitle">Playback Singer & Live Artist</div>
+          </div>
+        </div>
+        <p>{{ singer_profile.bio_short }}</p>
+        <div class="social-links-flex" style="margin-top: 1.5rem;">
+          <a href="{{ singer_profile.facebook_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="{{ singer_profile.instagram_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="{{ singer_profile.youtube_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-youtube"></i></a>
+          <a href="{{ singer_profile.google_maps_url }}" target="_blank" class="social-icon-btn"><i class="fa-solid fa-location-dot"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Performances</h4>
+        <ul>
+          {% for cat in nav_categories %}
+            <li><a href="{% url 'category_detail' cat.slug %}"><i class="fa-solid fa-angle-right" style="color: var(--gold-secondary);"></i> {{ cat.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'about' %}">About Brijesh Parekh</a></li>
+          <li><a href="{% url 'gallery' %}">Photo Gallery</a></li>
+          <li><a href="{% url 'music' %}">Audio Tracks</a></li>
+          <li><a href="{% url 'events' %}">Tour Schedule</a></li>
+          <li><a href="{% url 'contact' %}">Book Event</a></li>
+          <li><a href="/admin/" target="_blank">Admin Portal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Direct Contact</h4>
+        <ul>
+          <li><i class="fa-solid fa-phone gold-text"></i> {{ singer_profile.phone_primary }}</li>
+          <li><i class="fa-solid fa-phone gold-text"></i> {{ singer_profile.phone_secondary }}</li>
+          <li><i class="fa-solid fa-envelope gold-text"></i> {{ singer_profile.email }}</li>
+          <li><i class="fa-solid fa-location-dot gold-text"></i> {{ singer_profile.address }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; {% now "Y" %} Brijesh Parekh Official Website. All Rights Reserved. Designed & Powered by Silverstar Django Project.</p>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

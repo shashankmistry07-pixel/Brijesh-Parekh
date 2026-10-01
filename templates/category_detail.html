@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ category.name }} | Brijesh Parekh Official{% endblock %}
+
+{% block content %}
+<section class="hero-section" style="min-height: 60vh; padding-top: calc(var(--navbar-height) + 3rem);">
+  <div class="hero-bg-media">
+    <img src="{% static category.cover_image %}" alt="{{ category.name }}">
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-content" style="text-align: center; max-width: 900px; margin: 0 auto;">
+    <div class="badge-tag">
+      <i class="{{ category.icon }}"></i> Performance Category
+    </div>
+    <h1 class="hero-title"><span class="gold-text">{{ category.name }}</span></h1>
+    <div class="hero-subtitle">{{ category.subtitle }}</div>
+    <p class="hero-desc" style="margin-left: auto; margin-right: auto;">
+      {{ category.description }}
+    </p>
+    <div style="display: flex; justify-content: center; gap: 1rem;">
+      <a href="{% url 'contact' %}" class="btn-primary">
+        <i class="fa-solid fa-calendar-check"></i> Book {{ category.name }}
+      </a>
+      <a href="tel:{{ singer_profile.phone_primary }}" class="btn-secondary">
+        <i class="fa-solid fa-phone"></i> Call {{ singer_profile.phone_primary }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Category Photos Section -->
+<section class="gallery-section container">
+  <div class="section-title">
+    <h2>Photo Gallery — <span class="gold-text">{{ category.name }}</span></h2>
+    <p>Visual highlights and live stage moments</p>
+  </div>
+
+  <div class="gallery-masonry">
+    {% for item in gallery_items %}
+      <div class="gallery-card" data-img="{% static item.image_path %}">
+        <img src="{% static item.image_path %}" alt="{{ item.title }}">
+        <div class="gallery-overlay">
+          <span>{{ category.name }}</span>
+          <h4>{{ item.title }}</h4>
+        </div>
+      </div>
+    {% empty %}
+      <p style="text-align: center; color: var(--text-muted); grid-column: 1/-1;">No gallery photos added yet for this category.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Category Audio Tracks Section -->
+{% if tracks %}
+<section class="music-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Audio Snippets — <span class="gold-text">{{ category.name }}</span></h2>
+      <p>Listen to audio recordings and live stage samples</p>
+    </div>
+
+    <div class="track-list">
+      {% for track in tracks %}
+        <div class="glass-card track-card">
+          <div class="track-cover">
+            <img src="{% static track.cover_image %}" alt="{{ track.title }}">
+            <button class="play-track-btn" 
+                    data-audio="{{ track.audio_url }}" 
+                    data-title="{{ track.title }}" 
+                    data-sub="Brijesh Parekh - {{ category.name }}" 
+                    data-cover="{% static track.cover_image %}">
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+          <div class="track-info">
+            <div class="track-title">{{ track.title }}</div>
+            <div class="track-meta">
+              <span><i class="fa-solid fa-clock gold-text"></i> {{ track.duration }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

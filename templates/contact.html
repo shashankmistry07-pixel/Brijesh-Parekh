@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact & Booking | Singer Brijesh Parekh{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: calc(var(--navbar-height) + 4rem); padding-bottom: 6rem;">
+  <div class="section-title">
+    <h2>Contact & <span class="gold-text">Booking Office</span></h2>
+    <p>Reach out to Brijesh Parekh's management team to discuss show dates, pricing, and event arrangements</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="glass-card contact-info-card">
+      <h3>Official <span class="gold-text">Contact Channels</span></h3>
+      <p>Whether you're planning a wedding, corporate event, Navratri garba ground, or international festival, we'd love to hear from you.</p>
+
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+        <div class="info-text">
+          <h4>Phone Booking Hotline</h4>
+          <a href="tel:{{ profile.phone_primary }}">{{ profile.phone_primary }}</a><br>
+          <a href="tel:{{ profile.phone_secondary }}">{{ profile.phone_secondary }}</a>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div class="info-text">
+          <h4>Email Support</h4>
+          <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="info-text">
+          <h4>Base Location</h4>
+          <p>{{ profile.address }}</p>
+        </div>
+      </div>
+
+      <div class="social-connect">
+        <h4>Connect & Follow</h4>
+        <div class="social-links-flex">
+          <a href="{{ profile.facebook_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="{{ profile.instagram_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="{{ profile.youtube_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-youtube"></i></a>
+          <a href="{{ profile.google_maps_url }}" target="_blank" class="social-icon-btn"><i class="fa-solid fa-map-location-dot"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="glass-card form-card">
+      <h3 style="margin-bottom: 1.5rem;">Event <span class="gold-text">Inquiry Form</span></h3>
+      <div id="formToastContainer"></div>
+
+      <form id="bookingInquiryForm" method="POST" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" name="name" class="form-control" placeholder="e.g. Swati Patel" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" name="email" class="form-control" placeholder="e.g. swati@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone Number *</label>
+            <input type="tel" name="phone" class="form-control" placeholder="e.g. +91 9574805348" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Category *</label>
+            <select name="event_type" class="form-control">
+              <option value="Garba & Navratri">Garba & Navratri Festival</option>
+              <option value="Orchestra">Bollywood Orchestra & Live Band</option>
+              <option value="Wedding">Wedding Lagangeet & Sangeet</option>
+              <option value="International">International Tour / Concert</option>
+              <option value="Corporate">Corporate Event / Gala</option>
+              <option value="Other">Other Special Occasion</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Event Date</label>
+            <input type="date" name="event_date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">City / Venue</label>
+            <input type="text" name="location" class="form-control" placeholder="e.g. Ahmedabad, Gujarat">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input type="text" name="subject" class="form-control" placeholder="e.g. Navratri Garba 2026 Booking">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Detailed Requirements *</label>
+          <textarea name="message" class="form-control" placeholder="Please provide details on your event date, timing, crowd size, special requests..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+          <i class="fa-solid fa-paper-plane"></i> Send Booking Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

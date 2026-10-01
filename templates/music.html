@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Audio Tracks & Discography | Brijesh Parekh{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: calc(var(--navbar-height) + 4rem); padding-bottom: 6rem;">
+  <div class="section-title">
+    <h2>Music & <span class="gold-text">Audio Tracks</span></h2>
+    <p>Stream Brijesh Parekh's Gujarati Garba medleys, Bollywood Orchestra hits, Vaidik Lagangeet, and live show albums</p>
+  </div>
+
+  <div class="track-list" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));">
+    {% for track in tracks %}
+      <div class="glass-card track-card" style="padding: 1.2rem;">
+        <div class="track-cover" style="width: 85px; height: 85px;">
+          <img src="{% static track.cover_image %}" alt="{{ track.title }}">
+          <button class="play-track-btn" 
+                  data-audio="{{ track.audio_url }}" 
+                  data-title="{{ track.title }}" 
+                  data-sub="Brijesh Parekh - {{ track.category.name|default:'Official Track' }}" 
+                  data-cover="{% static track.cover_image %}">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
+        <div class="track-info">
+          <div class="track-title" style="font-size: 1.15rem;">{{ track.title }}</div>
+          <div class="track-meta" style="margin-top: 8px;">
+            <span><i class="fa-solid fa-tag gold-text"></i> {{ track.category.name|default:"General" }}</span>
+            <span class="track-duration">{{ track.duration }}</span>
+          </div>
+          <div style="margin-top: 10px;">
+            <button class="btn-secondary play-track-btn" 
+                    style="padding: 0.3rem 0.9rem; font-size: 0.75rem;"
+                    data-audio="{{ track.audio_url }}" 
+                    data-title="{{ track.title }}" 
+                    data-sub="Brijesh Parekh - {{ track.category.name|default:'Official Track' }}" 
+                    data-cover="{% static track.cover_image %}">
+              <i class="fa-solid fa-circle-play"></i> Play Track Now
+            </button>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

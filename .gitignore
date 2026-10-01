@@ -1,0 +1,22 @@
+# Python / Django
+*.py[cod]
+__pycache__/
+*.so
+.Python
+env/
+venv/
+ENV/
+.env
+
+# Database
+# db.sqlite3 (included if initial data needed)
+
+# Django staticfiles build
+staticfiles_build/
+staticfiles/
+
+# Vercel & IDE
+.vercel
+.vscode/
+.idea/
+*.log

@@ -1,0 +1,340 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Brijesh Parekh | Official Site - Professional Singer & Performer{% endblock %}
+
+{% block content %}
+
+<!-- Hero Banner Section -->
+<section class="hero-section">
+  <div class="hero-bg-media">
+    <img src="{% static 'pics/solo3.jpg' %}" alt="Brijesh Parekh Stage Performance">
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <div class="badge-tag">
+        <i class="fa-solid fa-star"></i> Playback Singer & Stage Performer
+      </div>
+      <h1 class="hero-title">
+        Electrifying <span class="gold-text">Live Stage</span> Magic
+      </h1>
+      <div class="hero-subtitle">
+        Brijesh Parekh — Setting Every Stage On Fire
+      </div>
+      <p class="hero-desc">
+        {{ profile.bio_short }}
+      </p>
+
+      <div class="hero-actions">
+        <a href="{% url 'contact' %}" class="btn-primary">
+          <i class="fa-solid fa-calendar-check"></i> Book Brijesh Parekh
+        </a>
+        <a href="{% url 'music' %}" class="btn-secondary">
+          <i class="fa-solid fa-circle-play"></i> Listen to Hits
+        </a>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>{{ profile.shows_count }}+</h3>
+          <p>Live Shows</p>
+        </div>
+        <div class="stat-item">
+          <h3>{{ profile.countries_count }}+</h3>
+          <p>Countries Toured</p>
+        </div>
+        <div class="stat-item">
+          <h3>{{ profile.years_experience }}+</h3>
+          <p>Years Experience</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video Card Showcase -->
+    <div class="hero-video-card">
+      <video controls autoplay muted loop poster="{% static 'pics/main.JPG' %}">
+        <source src="{% static profile.hero_video_path %}" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+      <div class="video-play-badge">
+        <div>
+          <strong style="color: var(--gold-primary); font-size: 0.9rem;">LIVE PERFORMANCE TRAILER</strong>
+          <p style="font-size: 0.75rem; color: var(--text-muted);">Watch Brijesh Parekh perform live on stage</p>
+        </div>
+        <i class="fa-solid fa-film" style="color: var(--gold-primary); font-size: 1.5rem;"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Performance Categories / Work & Profile Section -->
+<section class="services-section container">
+  <div class="section-title">
+    <h2>Performance <span class="gold-text">Categories</span></h2>
+    <p>From energetic Navratri Garba to grand Bollywood Orchestra and sacred Wedding Lagangeet</p>
+  </div>
+
+  <div class="services-grid">
+    {% for cat in categories %}
+      <div class="glass-card service-card">
+        <div class="service-img-wrapper">
+          <img src="{% static cat.cover_image %}" alt="{{ cat.name }}">
+          <div class="service-icon-tag">
+            <i class="{{ cat.icon }}"></i>
+          </div>
+        </div>
+        <div class="service-content">
+          <h3>{{ cat.name }}</h3>
+          <div class="service-subtitle">{{ cat.subtitle }}</div>
+          <p>{{ cat.description|truncatewords:20 }}</p>
+          <a href="{% url 'category_detail' cat.slug %}" class="service-link">
+            Explore Category <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Music & Audio Tracks Sampler Section -->
+<section class="music-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Popular <span class="gold-text">Audio Tracks</span></h2>
+      <p>Click play on any track to enjoy live recordings and studio medleys</p>
+    </div>
+
+    <div class="track-list">
+      {% for track in popular_tracks %}
+        <div class="glass-card track-card">
+          <div class="track-cover">
+            <img src="{% static track.cover_image %}" alt="{{ track.title }}">
+            <button class="play-track-btn" 
+                    data-audio="{{ track.audio_url }}" 
+                    data-title="{{ track.title }}" 
+                    data-sub="Brijesh Parekh - {{ track.category.name }}" 
+                    data-cover="{% static track.cover_image %}">
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+          <div class="track-info">
+            <div class="track-title">{{ track.title }}</div>
+            <div class="track-meta">
+              <span><i class="fa-solid fa-compact-disc gold-text"></i> {{ track.category.name }}</span>
+              <span class="track-duration">{{ track.duration }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="{% url 'music' %}" class="btn-secondary">
+        <i class="fa-solid fa-list-music"></i> View All Audio Tracks & Albums
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Photo Gallery Section -->
+<section class="gallery-section container">
+  <div class="section-title">
+    <h2>Photo <span class="gold-text">Gallery</span></h2>
+    <p>Moments from live concerts, Navratri grounds, weddings, and international tours</p>
+  </div>
+
+  <div class="gallery-masonry">
+    {% for item in featured_gallery %}
+      <div class="gallery-card" data-img="{% static item.image_path %}" data-category="{{ item.category.slug|default:'all' }}">
+        <img src="{% static item.image_path %}" alt="{{ item.title }}">
+        <div class="gallery-overlay">
+          <span>{{ item.category.name|default:"Live Concert" }}</span>
+          <h4>{{ item.title }}</h4>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div style="text-align: center; margin-top: 2.5rem;">
+    <a href="{% url 'gallery' %}" class="btn-primary">
+      <i class="fa-solid fa-images"></i> Explore Full Photo Gallery
+    </a>
+  </div>
+</section>
+
+<!-- Upcoming Shows Section -->
+<section class="events-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Tour & <span class="gold-text">Shows Schedule</span></h2>
+      <p>Catch Brijesh Parekh live in concert near you</p>
+    </div>
+
+    <div class="events-list">
+      {% for event in upcoming_events %}
+        <div class="glass-card event-row">
+          <div class="event-date-box">
+            <div class="day">{{ event.event_date|date:"d" }}</div>
+            <div class="month-year">{{ event.event_date|date:"b Y" }}</div>
+          </div>
+          <div class="event-details">
+            <h3>{{ event.title }}</h3>
+            <div class="event-meta">
+              <span><i class="fa-solid fa-location-dot"></i> {{ event.venue }}, {{ event.city_country }}</span>
+              <span><i class="fa-solid fa-clock"></i> {{ event.event_time }}</span>
+              <span><i class="fa-solid fa-tag"></i> {{ event.category.name }}</span>
+            </div>
+          </div>
+          <div>
+            <a href="{% url 'contact' %}" class="btn-secondary" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;">
+              Book / Inquiry <i class="fa-solid fa-ticket"></i>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section container">
+  <div class="section-title">
+    <h2>Client <span class="gold-text">Appreciations</span></h2>
+    <p>What organizers, wedding families, and fans say about Brijesh Parekh</p>
+  </div>
+
+  <div class="testimonials-grid">
+    {% for review in testimonials %}
+      <div class="glass-card testimonial-card">
+        <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <div class="stars">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div class="testimonial-text">"{{ review.content }}"</div>
+        <div class="client-meta">
+          <img src="{% static review.avatar %}" alt="{{ review.client_name }}" onerror="this.src='{% static 'pics/solo1.JPG' %}'">
+          <div class="client-info">
+            <h4>{{ review.client_name }}</h4>
+            <p>{{ review.role_or_event }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Quick Booking Form Section -->
+<section class="contact-section container" id="booking-section">
+  <div class="contact-grid">
+    <div class="glass-card contact-info-card">
+      <h3>Book <span class="gold-text">Brijesh Parekh</span> For Your Event</h3>
+      <p>Planning a Navratri festival, destination wedding, corporate gala, or orchestra concert? Fill out the form or reach out directly to secure dates.</p>
+
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+        <div class="info-text">
+          <h4>Direct Phone Call</h4>
+          <a href="tel:{{ profile.phone_primary }}">{{ profile.phone_primary }}</a> / 
+          <a href="tel:{{ profile.phone_secondary }}">{{ profile.phone_secondary }}</a>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div class="info-text">
+          <h4>Email Inquiries</h4>
+          <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="info-text">
+          <h4>Location</h4>
+          <p>{{ profile.address }}</p>
+        </div>
+      </div>
+
+      <div class="social-connect">
+        <h4>Connect On Social Media</h4>
+        <div class="social-links-flex">
+          <a href="{{ profile.facebook_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="{{ profile.instagram_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="{{ profile.youtube_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-youtube"></i></a>
+          <a href="{{ profile.google_maps_url }}" target="_blank" class="social-icon-btn"><i class="fa-solid fa-map-location-dot"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive AJAX Form -->
+    <div class="glass-card form-card">
+      <h3 style="margin-bottom: 1.5rem;">Send <span class="gold-text">Booking Inquiry</span></h3>
+      <div id="formToastContainer"></div>
+
+      <form id="bookingInquiryForm">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Your Full Name *</label>
+            <input type="text" name="name" class="form-control" placeholder="e.g. Rahul Patel" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Email *</label>
+            <input type="email" name="email" class="form-control" placeholder="e.g. rahul@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone Number *</label>
+            <input type="tel" name="phone" class="form-control" placeholder="e.g. +91 9876543210" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Type *</label>
+            <select name="event_type" class="form-control">
+              <option value="Garba & Navratri">Garba & Navratri Festival</option>
+              <option value="Orchestra">Bollywood Orchestra & Live Band</option>
+              <option value="Wedding">Wedding Lagangeet & Sangeet</option>
+              <option value="International">International Tour / Concert</option>
+              <option value="Corporate">Corporate Event / Gala</option>
+              <option value="Other">Other Occasion</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Event Date (Optional)</label>
+            <input type="date" name="event_date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location / City</label>
+            <input type="text" name="location" class="form-control" placeholder="e.g. Ahmedabad, Mumbai, London">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input type="text" name="subject" class="form-control" placeholder="e.g. Inquiry for Navratri Garba 2026">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Your Message / Requirements *</label>
+          <textarea name="message" class="form-control" placeholder="Tell us about your event details, expected crowd size, venue, and special song requests..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+          <i class="fa-solid fa-paper-plane"></i> Submit Booking Inquiry
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

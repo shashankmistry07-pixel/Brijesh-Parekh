@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Brijesh Parekh | Playback Singer & Artist Profile{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: calc(var(--navbar-height) + 4rem); padding-bottom: 6rem;">
+  <div class="section-title">
+    <h2>About <span class="gold-text">Brijesh Parekh</span></h2>
+    <p>Sensational Gujarati Playback Singer, Composer & Dynamic Live Performer</p>
+  </div>
+
+  <div class="contact-grid" style="align-items: center;">
+    <div class="glass-card" style="padding: 1.5rem; text-align: center; border-radius: 20px;">
+      <img src="{% static 'pics/alb61-removebg-preview.png' %}" alt="Brijesh Parekh Singer" style="max-height: 480px; margin: 0 auto; filter: drop-shadow(0 15px 25px rgba(245, 207, 97, 0.25));" onerror="this.src='{% static 'pics/solo3.jpg' %}'">
+      <div style="margin-top: 1.5rem;">
+        <h3 class="gold-text" style="font-size: 1.8rem;">Brijesh Parekh</h3>
+        <p style="color: var(--gold-secondary); font-weight: 600;">Playback Singer & Cultural Ambassador</p>
+      </div>
+    </div>
+
+    <div class="glass-card" style="padding: 3rem 2.5rem;">
+      <h3 style="font-size: 2.2rem; margin-bottom: 1.2rem;">Biography & <span class="gold-text">Artistic Journey</span></h3>
+      <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        {{ profile.bio_full|linebreaks }}
+      </p>
+
+      <div class="stats-grid" style="margin-top: 2rem; border-top: 1px solid var(--border-light); padding-top: 1.5rem;">
+        <div class="stat-item">
+          <h3>{{ profile.shows_count }}+</h3>
+          <p>Global Shows</p>
+        </div>
+        <div class="stat-item">
+          <h3>{{ profile.countries_count }}+</h3>
+          <p>Nations Toured</p>
+        </div>
+        <div class="stat-item">
+          <h3>{{ profile.years_experience }}+</h3>
+          <p>Stage Legacy</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 2.5rem;">
+        <a href="{% url 'contact' %}" class="btn-primary">
+          <i class="fa-solid fa-calendar-check"></i> Book Brijesh Parekh
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Career Specializations & Achievements -->
+<section class="services-section container">
+  <div class="section-title">
+    <h2>Specializations & <span class="gold-text">Signature Styles</span></h2>
+    <p>Exploring the musical domains where Brijesh Parekh creates unforgettable stage experiences</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="glass-card service-card">
+      <div class="service-img-wrapper">
+        <img src="{% static 'pics/solo3.jpg' %}" alt="Navratri Garba">
+      </div>
+      <div class="service-content">
+        <h3>Navratri & Raas-Garba</h3>
+        <div class="service-subtitle">Traditional & Modern Electro Beats</div>
+        <p>Leading Navratri celebrations with unmatched vocal stamina, traditional Gujarati dhol rhythms, and non-stop audience engagement.</p>
+      </div>
+    </div>
+
+    <div class="glass-card service-card">
+      <div class="service-img-wrapper">
+        <img src="{% static 'pics/alb1.JPG' %}" alt="Bollywood Orchestra">
+      </div>
+      <div class="service-content">
+        <h3>Bollywood Orchestra</h3>
+        <div class="service-subtitle">Retro Melodies & Dynamic Hits</div>
+        <p>Performing with a full orchestra band, bringing Kishore Kumar, Mohammed Rafi, and modern Bollywood hits live to gala concerts.</p>
+      </div>
+    </div>
+
+    <div class="glass-card service-card">
+      <div class="service-img-wrapper">
+        <img src="{% static 'Lagangeet/main.jpg' %}" alt="Wedding Lagangeet">
+      </div>
+      <div class="service-content">
+        <h3>Sacred Lagangeet</h3>
+        <div class="service-subtitle">Traditional Vaidik Wedding Chants</div>
+        <p>Enhancing royal weddings with soulful Vaidik rituals, Kanya Vidaai, Mandap Mahurat, and joyous Sangeet Sandhya performances.</p>
+      </div>
+    </div>
+
+    <div class="glass-card service-card">
+      <div class="service-img-wrapper">
+        <img src="{% static 'International/main.jpg' %}" alt="International Tours">
+      </div>
+      <div class="service-content">
+        <h3>Global Concerts</h3>
+        <div class="service-subtitle">USA, UK, West Indies & Africa</div>
+        <p>Representing Indian music culture on foreign stages, uniting diaspora communities with nostalgic and energetic live singing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

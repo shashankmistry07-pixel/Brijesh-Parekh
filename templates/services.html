@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Performances & Services | Brijesh Parekh{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: calc(var(--navbar-height) + 4rem); padding-bottom: 6rem;">
+  <div class="section-title">
+    <h2>Performance <span class="gold-text">Services & Shows</span></h2>
+    <p>Comprehensive overview of musical shows, wedding performances, and concert setups</p>
+  </div>
+
+  <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+    {% for cat in categories %}
+      <div class="glass-card service-card">
+        <div class="service-img-wrapper" style="height: 280px;">
+          <img src="{% static cat.cover_image %}" alt="{{ cat.name }}">
+          <div class="service-icon-tag">
+            <i class="{{ cat.icon }}"></i>
+          </div>
+        </div>
+        <div class="service-content">
+          <h3>{{ cat.name }}</h3>
+          <div class="service-subtitle">{{ cat.subtitle }}</div>
+          <p style="margin-bottom: 1.5rem;">{{ cat.description }}</p>
+          
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="{% url 'category_detail' cat.slug %}" class="btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.85rem;">
+              View Gallery & Audio <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="{% url 'contact' %}" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.85rem;">
+              Book This Show
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
