@@ -1,31 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Photo & Video Gallery | Brijesh Parekh{% endblock %}
+{% block title %}Photo Gallery | Brijesh Parekh Official{% endblock %}
 
 {% block content %}
 <section class="container" style="padding-top: calc(var(--navbar-height) + 4rem); padding-bottom: 6rem;">
   <div class="section-title">
-    <h2>Photo & Video <span class="gold-text">Gallery</span></h2>
+    <h2>Photo <span class="gold-text">Gallery</span></h2>
     <p>High resolution photography and live stage moments from Brijesh Parekh's concerts around the globe</p>
   </div>
 
   <div class="gallery-filters">
-    <button class="filter-btn {% if selected_category == 'all' %}active{% endif %}" data-filter="all">All Photos</button>
+    <a href="{% url 'gallery' %}" class="filter-btn {% if selected_category == 'all' or not selected_category %}active{% endif %}">All Photos</a>
     {% for cat in categories %}
-      <button class="filter-btn {% if selected_category == cat.slug %}active{% endif %}" data-filter="{{ cat.slug }}">{{ cat.name }}</button>
+      <a href="{% url 'gallery' %}?category={{ cat.slug }}" class="filter-btn {% if selected_category == cat.slug %}active{% endif %}">{{ cat.name }}</a>
     {% endfor %}
   </div>
 
   <div class="gallery-masonry">
     {% for item in gallery_items %}
       <div class="gallery-card" data-img="{% static item.image_path %}" data-category="{{ item.category.slug|default:'all' }}">
-        <img src="{% static item.image_path %}" alt="{{ item.title }}">
+        <img src="{% static item.image_path %}" alt="{{ item.title }}" loading="lazy" decoding="async">
         <div class="gallery-overlay">
           <span>{{ item.category.name|default:"Live Concert" }}</span>
           <h4>{{ item.title }}</h4>
         </div>
       </div>
+    {% empty %}
+      <p style="text-align: center; color: var(--text-muted); grid-column: 1/-1;">No photos available for this category yet.</p>
     {% endfor %}
   </div>
 </section>

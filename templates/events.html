@@ -1,16 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Shows & Tour Schedule | Brijesh Parekh{% endblock %}
+{% block title %}Shows & Tour Schedule 2026 | Brijesh Parekh Live Concerts{% endblock %}
 
 {% block content %}
 <section class="container" style="padding-top: calc(var(--navbar-height) + 4rem); padding-bottom: 6rem;">
   <div class="section-title">
-    <h2>Tour & <span class="gold-text">Show Schedule</span></h2>
-    <p>Explore upcoming live concerts and past grand performance tours</p>
+    <h2>Navratri Tour & <span class="gold-text">Show Schedule</span></h2>
+    <p>Official 2026 concert dates, Navratri Raas-Garba festival locations, and live performance schedule</p>
   </div>
 
-  <h3 class="gold-text" style="font-size: 1.8rem; margin-bottom: 1.5rem; text-transform: uppercase;">Upcoming Shows & Tours</h3>
+  <!-- Detailed Upcoming Shows List (Pure Info Only - No booking buttons/numbers) -->
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+    <h3 class="gold-text" style="font-size: clamp(1.4rem, 2.5vw, 1.8rem); margin: 0; text-transform: uppercase;">
+      <i class="fa-solid fa-calendar-days"></i> Upcoming Shows & Tour Dates
+    </h3>
+    <span style="color: var(--text-muted); font-size: 0.9rem;">
+      <i class="fa-solid fa-circle-info gold-text"></i> Live Tour Schedule Information
+    </span>
+  </div>
+
   <div class="events-list" style="margin-bottom: 4rem;">
     {% for event in upcoming_events %}
       <div class="glass-card event-row">
@@ -19,7 +28,7 @@
           <div class="month-year">{{ event.event_date|date:"b Y" }}</div>
         </div>
         <div class="event-details">
-          <h3>{{ event.title }}</h3>
+          <h3 style="color: var(--text-main); font-size: 1.3rem; margin-bottom: 0.4rem;">{{ event.title }}</h3>
           <div class="event-meta">
             <span><i class="fa-solid fa-location-dot"></i> {{ event.venue }}, {{ event.city_country }}</span>
             <span><i class="fa-solid fa-clock"></i> {{ event.event_time }}</span>
@@ -27,37 +36,42 @@
           </div>
         </div>
         <div>
-          <a href="{% url 'contact' %}" class="btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.85rem;">
-            Book Tickets / Pass <i class="fa-solid fa-ticket"></i>
-          </a>
+          <span class="badge-tag" style="margin-bottom: 0; background: rgba(245, 207, 97, 0.12); border-color: var(--gold-primary); color: var(--gold-primary); font-weight: 600; padding: 0.45rem 1rem; font-size: 0.82rem;">
+            <i class="fa-solid fa-circle-check"></i> Confirmed
+          </span>
         </div>
       </div>
     {% empty %}
-      <p style="color: var(--text-muted);">No upcoming public shows scheduled at this moment. Contact us for private booking!</p>
+      <p style="color: var(--text-muted); text-align: center; padding: 2rem; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-light);">No upcoming public shows scheduled at this moment.</p>
     {% endfor %}
   </div>
 
-  <h3 class="gold-text" style="font-size: 1.8rem; margin-bottom: 1.5rem; text-transform: uppercase;">Past Performance Highlights</h3>
+  <!-- Past Performance Highlights -->
+  <h3 class="gold-text" style="font-size: 1.8rem; margin-bottom: 1.5rem; text-transform: uppercase;">
+    <i class="fa-solid fa-clock-rotate-left"></i> Past Performance Highlights
+  </h3>
   <div class="events-list">
     {% for event in past_events %}
-      <div class="glass-card event-row" style="opacity: 0.8;">
+      <div class="glass-card event-row" style="opacity: 0.85;">
         <div class="event-date-box" style="border-right-color: var(--text-dim);">
           <div class="day" style="color: var(--text-muted);">{{ event.event_date|date:"d" }}</div>
           <div class="month-year">{{ event.event_date|date:"b Y" }}</div>
         </div>
         <div class="event-details">
-          <h3>{{ event.title }}</h3>
+          <h3 style="color: var(--text-muted); font-size: 1.15rem; margin-bottom: 0.3rem;">{{ event.title }}</h3>
           <div class="event-meta">
             <span><i class="fa-solid fa-location-dot"></i> {{ event.venue }}, {{ event.city_country }}</span>
             <span><i class="fa-solid fa-tag"></i> {{ event.category.name }}</span>
           </div>
         </div>
         <div>
-          <span class="badge-tag" style="margin-bottom: 0; background: rgba(255,255,255,0.05); border-color: var(--text-dim); color: var(--text-muted);">
+          <span class="badge-tag" style="margin-bottom: 0; background: rgba(255,255,255,0.05); border-color: var(--border-light); color: var(--text-muted); font-size: 0.8rem;">
             Completed Show
           </span>
         </div>
       </div>
+    {% empty %}
+      <p style="color: var(--text-muted);">No past show records found.</p>
     {% endfor %}
   </div>
 </section>

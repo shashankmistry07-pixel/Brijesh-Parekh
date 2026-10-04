@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Performances & Services | Brijesh Parekh{% endblock %}
+{% block title %}Performances & Services | Brijesh Parekh Official{% endblock %}
 
 {% block content %}
 <section class="container" style="padding-top: calc(var(--navbar-height) + 4rem); padding-bottom: 6rem;">
@@ -14,7 +14,7 @@
     {% for cat in categories %}
       <div class="glass-card service-card">
         <div class="service-img-wrapper" style="height: 280px;">
-          <img src="{% static cat.cover_image %}" alt="{{ cat.name }}">
+          <img src="{% static cat.cover_image %}" alt="{{ cat.name }}" loading="lazy" decoding="async">
           <div class="service-icon-tag">
             <i class="{{ cat.icon }}"></i>
           </div>
@@ -26,7 +26,7 @@
           
           <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
             <a href="{% url 'category_detail' cat.slug %}" class="btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.85rem;">
-              View Gallery & Audio <i class="fa-solid fa-arrow-right"></i>
+              View Gallery & Videos <i class="fa-solid fa-arrow-right"></i>
             </a>
             <a href="{% url 'contact' %}" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.85rem;">
               Book This Show

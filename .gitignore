@@ -1,5 +1,6 @@
-# Python / Django
+# Python / Bytecode
 *.py[cod]
+*$py.class
 __pycache__/
 *.so
 .Python
@@ -8,17 +9,17 @@ venv/
 ENV/
 .env
 
-# Database
-# db.sqlite3 (included if initial data needed)
-
-# Django staticfiles build
+# Static build & collectstatic
 staticfiles_build/
 staticfiles/
 
-# Vercel & IDE
+# Vercel & Deployment
 .vercel
+.vercel/
+
+# IDE & OS files
 .vscode/
 .idea/
 *.log
-
-.vercel
+Thumbs.db
+.DS_Store

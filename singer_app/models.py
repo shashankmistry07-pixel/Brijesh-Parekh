@@ -8,15 +8,19 @@ class SingerProfile(models.Model):
     years_experience = models.IntegerField(default=20, help_text="Years of professional singing")
     bio_short = models.TextField(default="Let me introduce to a very talented, electrifying performer and sensational singer. Whether it's a wedding or concert, when he steps on the stage he sets it on fire. Playback singer in many Gujarati albums and movies with over 4000 shows in India and abroad.")
     bio_full = models.TextField(default="Brijesh Parekh is one of Gujarat's most celebrated playback singers and dynamic live performers. With over 4,000 successful shows globally across India, USA, UK, West Indies, and Africa, Brijesh Parekh creates magic on stage with high-energy Garba, soulful Lagangeet (wedding songs), nostalgic Bollywood Orchestra, and thrilling DJ nights. Known for his captivating voice, incredible vocal range, and unmatched stage command, he brings life and grandeur to every celebration.")
-    phone_primary = models.CharField(max_length=30, default="+91 9574805348")
-    phone_secondary = models.CharField(max_length=30, default="+91 9825000000")
-    email = models.EmailField(default="brijeshparekh@gmail.com")
+    phone_primary = models.CharField(max_length=30, default="+91 95748 05348")
+    phone_secondary = models.CharField(max_length=30, blank=True, default="")
+    email = models.EmailField(default="brijesh71090parekh@gmail.com")
     address = models.CharField(max_length=255, default="Ahmedabad, Gujarat, India")
     facebook_url = models.URLField(default="https://www.facebook.com/brijeshparekhnight?mibextid=LQQJ4d")
     instagram_url = models.URLField(default="https://www.instagram.com/thebrijeshparekh?igsh=amIwamgxbjU0aDFh&utm_source=qr")
     youtube_url = models.URLField(default="https://youtube.com/@brijeshparekhofficial5953?si=E4l35MJxYiL2Pbgt")
     google_maps_url = models.URLField(default="https://maps.app.goo.gl/x4TiHEh2ehnbZqW7A?g_st=com.google.maps.preview.copy")
     hero_video_path = models.CharField(max_length=255, default="V1.MP4")
+
+    class Meta:
+        verbose_name = "Singer Profile"
+        verbose_name_plural = "Singer Profile"
 
     def __str__(self):
         return self.name
@@ -31,6 +35,7 @@ class PerformanceCategory(models.Model):
     display_order = models.IntegerField(default=0)
 
     class Meta:
+        verbose_name = "Performance Category"
         verbose_name_plural = "Performance Categories"
         ordering = ['display_order', 'id']
 
@@ -46,6 +51,8 @@ class GalleryItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        verbose_name = "Gallery Item"
+        verbose_name_plural = "Gallery Media (Photos & Videos)"
         ordering = ['-created_at', '-id']
 
     def __str__(self):
@@ -58,6 +65,10 @@ class AudioTrack(models.Model):
     audio_url = models.CharField(max_length=255, help_text="URL or static path to audio sample", default="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
     cover_image = models.CharField(max_length=255, default="pics/solo3.jpg")
     is_popular = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Audio Track"
+        verbose_name_plural = "Audio Tracks"
 
     def __str__(self):
         return self.title
@@ -78,6 +89,8 @@ class ShowEvent(models.Model):
     booking_link = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
+        verbose_name = "Show Event"
+        verbose_name_plural = "Shows & Events"
         ordering = ['event_date']
 
     def __str__(self):
@@ -89,6 +102,10 @@ class Testimonial(models.Model):
     content = models.TextField()
     rating = models.IntegerField(default=5)
     avatar = models.CharField(max_length=255, default="images/artist-1.jpg")
+
+    class Meta:
+        verbose_name = "Testimonial"
+        verbose_name_plural = "Testimonials & Reviews"
 
     def __str__(self):
         return f"{self.client_name} - {self.role_or_event}"
@@ -102,18 +119,18 @@ class BookingInquiry(models.Model):
     ]
 
     EVENT_CHOICES = [
-        ('Garba & Navratri', 'Garba & Navratri Festival'),
-        ('Orchestra', 'Bollywood Orchestra & Live Band'),
-        ('Wedding', 'Wedding Lagangeet & Sangeet'),
-        ('International', 'International Tour / Show'),
-        ('Corporate', 'Corporate Event & Award Show'),
-        ('Other', 'Other Special Occasion'),
+        ('Garba', 'Garba'),
+        ('Bollywood Live', 'Bollywood Live Concert'),
+        ('Wedding Songs', 'Wedding Songs & Sangeet'),
+        ('Spiritual Music (Bhajan)', 'Spiritual Music (Bhajan)'),
+        ('Corporate / Gala Event', 'Corporate / Gala Event'),
+        ('Other Special Occasion', 'Other Special Occasion'),
     ]
 
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-    event_type = models.CharField(max_length=50, choices=EVENT_CHOICES, default='Garba & Navratri')
+    event_type = models.CharField(max_length=50, choices=EVENT_CHOICES, default='Garba')
     event_date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=150, blank=True, null=True)
     subject = models.CharField(max_length=200)
@@ -123,6 +140,8 @@ class BookingInquiry(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        verbose_name = "Booking Inquiry"
+        verbose_name_plural = "Booking Inquiries (Contact Form Submissions)"
         ordering = ['-created_at']
 
     def __str__(self):

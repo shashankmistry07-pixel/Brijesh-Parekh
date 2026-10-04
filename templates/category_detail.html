@@ -6,7 +6,7 @@
 {% block content %}
 <section class="hero-section" style="min-height: 60vh; padding-top: calc(var(--navbar-height) + 3rem);">
   <div class="hero-bg-media">
-    <img src="{% static category.cover_image %}" alt="{{ category.name }}">
+    <img src="{% static category.cover_image %}" alt="{{ category.name }}" fetchpriority="high">
   </div>
   <div class="hero-overlay"></div>
 
@@ -19,7 +19,7 @@
     <p class="hero-desc" style="margin-left: auto; margin-right: auto;">
       {{ category.description }}
     </p>
-    <div style="display: flex; justify-content: center; gap: 1rem;">
+    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
       <a href="{% url 'contact' %}" class="btn-primary">
         <i class="fa-solid fa-calendar-check"></i> Book {{ category.name }}
       </a>
@@ -40,7 +40,7 @@
   <div class="gallery-masonry">
     {% for item in gallery_items %}
       <div class="gallery-card" data-img="{% static item.image_path %}">
-        <img src="{% static item.image_path %}" alt="{{ item.title }}">
+        <img src="{% static item.image_path %}" alt="{{ item.title }}" loading="lazy" decoding="async">
         <div class="gallery-overlay">
           <span>{{ category.name }}</span>
           <h4>{{ item.title }}</h4>
@@ -52,38 +52,27 @@
   </div>
 </section>
 
-<!-- Category Audio Tracks Section -->
-{% if tracks %}
-<section class="music-section">
+<!-- Category Video Tracks Section -->
+<section class="music-section" style="padding: 4rem 0;">
   <div class="container">
     <div class="section-title">
-      <h2>Audio Snippets — <span class="gold-text">{{ category.name }}</span></h2>
-      <p>Listen to audio recordings and live stage samples</p>
+      <h2>Video Tracks — <span class="gold-text">{{ category.name }}</span></h2>
+      <p>Watch live stage performances and video highlights for {{ category.name }}</p>
     </div>
 
-    <div class="track-list">
-      {% for track in tracks %}
-        <div class="glass-card track-card">
-          <div class="track-cover">
-            <img src="{% static track.cover_image %}" alt="{{ track.title }}">
-            <button class="play-track-btn" 
-                    data-audio="{{ track.audio_url }}" 
-                    data-title="{{ track.title }}" 
-                    data-sub="Brijesh Parekh - {{ category.name }}" 
-                    data-cover="{% static track.cover_image %}">
-              <i class="fa-solid fa-play"></i>
-            </button>
-          </div>
-          <div class="track-info">
-            <div class="track-title">{{ track.title }}</div>
-            <div class="track-meta">
-              <span><i class="fa-solid fa-clock gold-text"></i> {{ track.duration }}</span>
-            </div>
+    <div class="gallery-masonry" style="margin-top: 2rem;">
+      {% for video in videos %}
+        <div class="gallery-card">
+          <video src="{% static video.image_path %}" controls preload="metadata" playsinline style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px;"></video>
+          <div class="gallery-overlay" style="pointer-events: none;">
+            <span>{{ category.name }}</span>
+            <h4>{{ video.title }}</h4>
           </div>
         </div>
+      {% empty %}
+        <p style="text-align: center; color: var(--text-muted); grid-column: 1/-1;">No video tracks available yet for this category.</p>
       {% endfor %}
     </div>
   </div>
 </section>
-{% endif %}
 {% endblock %}

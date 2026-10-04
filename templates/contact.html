@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Contact & Booking | Singer Brijesh Parekh{% endblock %}
+{% block title %}Contact & Booking | Singer Brijesh Parekh Official{% endblock %}
 
 {% block content %}
 <section class="container" style="padding-top: calc(var(--navbar-height) + 4rem); padding-bottom: 6rem;">
@@ -13,14 +13,13 @@
   <div class="contact-grid">
     <div class="glass-card contact-info-card">
       <h3>Official <span class="gold-text">Contact Channels</span></h3>
-      <p>Whether you're planning a wedding, corporate event, Navratri garba ground, or international festival, we'd love to hear from you.</p>
+      <p>Whether you're planning a wedding, corporate event, Navratri garba ground, or spiritual bhajan sandhya, we'd love to hear from you.</p>
 
       <div class="info-item">
         <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
         <div class="info-text">
           <h4>Phone Booking Hotline</h4>
-          <a href="tel:{{ profile.phone_primary }}">{{ profile.phone_primary }}</a><br>
-          <a href="tel:{{ profile.phone_secondary }}">{{ profile.phone_secondary }}</a>
+          <a href="tel:{{ profile.phone_primary }}">{{ profile.phone_primary }}</a>{% if profile.phone_secondary %}<br><a href="tel:{{ profile.phone_secondary }}">{{ profile.phone_secondary }}</a>{% endif %}
         </div>
       </div>
 
@@ -43,10 +42,10 @@
       <div class="social-connect">
         <h4>Connect & Follow</h4>
         <div class="social-links-flex">
-          <a href="{{ profile.facebook_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="{{ profile.instagram_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-instagram"></i></a>
-          <a href="{{ profile.youtube_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-youtube"></i></a>
-          <a href="{{ profile.google_maps_url }}" target="_blank" class="social-icon-btn"><i class="fa-solid fa-map-location-dot"></i></a>
+          <a href="{{ profile.facebook_url }}" target="_blank" rel="noopener" class="social-icon-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="{{ profile.instagram_url }}" target="_blank" rel="noopener" class="social-icon-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="{{ profile.youtube_url }}" target="_blank" rel="noopener" class="social-icon-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="{{ profile.google_maps_url }}" target="_blank" rel="noopener" class="social-icon-btn" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
         </div>
       </div>
     </div>
@@ -60,52 +59,52 @@
         {% csrf_token %}
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Full Name *</label>
-            <input type="text" name="name" class="form-control" placeholder="e.g. Swati Patel" required>
+            <label class="form-label" for="contact_name">Full Name *</label>
+            <input type="text" id="contact_name" name="name" class="form-control" placeholder="e.g. Swati Patel" required autocomplete="name">
           </div>
           <div class="form-group">
-            <label class="form-label">Email Address *</label>
-            <input type="email" name="email" class="form-control" placeholder="e.g. swati@example.com" required>
+            <label class="form-label" for="contact_email">Email Address *</label>
+            <input type="email" id="contact_email" name="email" class="form-control" placeholder="e.g. swati@example.com" required autocomplete="email">
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Phone Number *</label>
-            <input type="tel" name="phone" class="form-control" placeholder="e.g. +91 9574805348" required>
+            <label class="form-label" for="contact_phone">Phone Number *</label>
+            <input type="tel" id="contact_phone" name="phone" class="form-control" placeholder="e.g. +91 95748 05348" required autocomplete="tel">
           </div>
           <div class="form-group">
-            <label class="form-label">Event Category *</label>
-            <select name="event_type" class="form-control">
-              <option value="Garba & Navratri">Garba & Navratri Festival</option>
-              <option value="Orchestra">Bollywood Orchestra & Live Band</option>
-              <option value="Wedding">Wedding Lagangeet & Sangeet</option>
-              <option value="International">International Tour / Concert</option>
-              <option value="Corporate">Corporate Event / Gala</option>
-              <option value="Other">Other Special Occasion</option>
+            <label class="form-label" for="contact_event_type">Event Category *</label>
+            <select id="contact_event_type" name="event_type" class="form-control">
+              <option value="Garba">Garba</option>
+              <option value="Bollywood Live">Bollywood Live Concert</option>
+              <option value="Wedding Songs">Wedding Songs & Sangeet</option>
+              <option value="Spiritual Music (Bhajan)">Spiritual Music (Bhajan)</option>
+              <option value="Corporate / Gala Event">Corporate / Gala Event</option>
+              <option value="Other Special Occasion">Other Special Occasion</option>
             </select>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Event Date</label>
-            <input type="date" name="event_date" class="form-control">
+            <label class="form-label" for="contact_date">Event Date</label>
+            <input type="date" id="contact_date" name="event_date" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">City / Venue</label>
-            <input type="text" name="location" class="form-control" placeholder="e.g. Ahmedabad, Gujarat">
+            <label class="form-label" for="contact_location">City / Venue</label>
+            <input type="text" id="contact_location" name="location" class="form-control" placeholder="e.g. Ahmedabad, Gujarat">
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Subject</label>
-          <input type="text" name="subject" class="form-control" placeholder="e.g. Navratri Garba 2026 Booking">
+          <label class="form-label" for="contact_subject">Subject</label>
+          <input type="text" id="contact_subject" name="subject" class="form-control" placeholder="e.g. Navratri Garba 2026 Booking">
         </div>
 
         <div class="form-group">
-          <label class="form-label">Detailed Requirements *</label>
-          <textarea name="message" class="form-control" placeholder="Please provide details on your event date, timing, crowd size, special requests..." required></textarea>
+          <label class="form-label" for="contact_message">Detailed Requirements *</label>
+          <textarea id="contact_message" name="message" class="form-control" placeholder="Please provide details on your event date, timing, crowd size, special requests..." required></textarea>
         </div>
 
         <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">

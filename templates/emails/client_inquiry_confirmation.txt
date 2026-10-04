@@ -1,0 +1,20 @@
+Dear {{ inquiry.name }},
+
+Thank you for reaching out to Brijesh Parekh's management team regarding your upcoming celebration! We have successfully received your booking inquiry.
+
+YOUR INQUIRY SUMMARY:
+---------------------
+Event Category: {{ inquiry.event_type }}
+{% if inquiry.event_date %}Requested Date:  {{ inquiry.event_date }}{% endif %}
+{% if inquiry.location %}Venue / City:    {{ inquiry.location }}{% endif %}
+Message:         {{ inquiry.message }}
+
+Our management team is reviewing your requested dates and event arrangements. We will contact you shortly via phone or email with availability and package details.
+
+Need direct discussion?
+Phone Hotline: +91 95748 05348
+Email Support: brijesh71090parekh@gmail.com
+
+Warm Regards,
+Brijesh Parekh & Management Team
+Ahmedabad, Gujarat, India

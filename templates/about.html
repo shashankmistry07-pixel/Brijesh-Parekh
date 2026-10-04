@@ -12,7 +12,7 @@
 
   <div class="contact-grid" style="align-items: center;">
     <div class="glass-card" style="padding: 1.5rem; text-align: center; border-radius: 20px;">
-      <img src="{% static 'pics/alb61-removebg-preview.png' %}" alt="Brijesh Parekh Singer" style="max-height: 480px; margin: 0 auto; filter: drop-shadow(0 15px 25px rgba(245, 207, 97, 0.25));" onerror="this.src='{% static 'pics/solo3.jpg' %}'">
+      <img src="{% static 'pics/alb61-removebg-preview.png' %}" alt="Brijesh Parekh Singer" style="max-height: 480px; margin: 0 auto; filter: drop-shadow(0 15px 25px rgba(245, 207, 97, 0.25));" onerror="this.onerror=null; this.src='/static/pics/solo3.jpg';" loading="lazy" decoding="async">
       <div style="margin-top: 1.5rem;">
         <h3 class="gold-text" style="font-size: 1.8rem;">Brijesh Parekh</h3>
         <p style="color: var(--gold-secondary); font-weight: 600;">Playback Singer & Cultural Ambassador</p>
@@ -21,9 +21,9 @@
 
     <div class="glass-card" style="padding: 3rem 2.5rem;">
       <h3 style="font-size: 2.2rem; margin-bottom: 1.2rem;">Biography & <span class="gold-text">Artistic Journey</span></h3>
-      <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+      <div style="color: var(--text-main); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
         {{ profile.bio_full|linebreaks }}
-      </p>
+      </div>
 
       <div class="stats-grid" style="margin-top: 2rem; border-top: 1px solid var(--border-light); padding-top: 1.5rem;">
         <div class="stat-item">
@@ -59,45 +59,45 @@
   <div class="services-grid">
     <div class="glass-card service-card">
       <div class="service-img-wrapper">
-        <img src="{% static 'pics/solo3.jpg' %}" alt="Navratri Garba">
+        <img src="{% static 'pics/solo3.jpg' %}" alt="Garba" loading="lazy" decoding="async">
       </div>
       <div class="service-content">
-        <h3>Navratri & Raas-Garba</h3>
-        <div class="service-subtitle">Traditional & Modern Electro Beats</div>
-        <p>Leading Navratri celebrations with unmatched vocal stamina, traditional Gujarati dhol rhythms, and non-stop audience engagement.</p>
+        <h3>Garba</h3>
+        <div class="service-subtitle">Wedding Garba, Navratri Mahotsav & Traditional Beats</div>
+        <p>Leading high-energy Navratri celebrations and wedding Garba nights with authentic Gujarati dhol rhythm, non-stop stamina, and vibrant stage presence.</p>
       </div>
     </div>
 
     <div class="glass-card service-card">
       <div class="service-img-wrapper">
-        <img src="{% static 'pics/alb1.JPG' %}" alt="Bollywood Orchestra">
+        <img src="{% static 'Bollywwod Live/photos/p-12.jpg' %}" alt="Bollywood Live" loading="lazy" decoding="async">
       </div>
       <div class="service-content">
-        <h3>Bollywood Orchestra</h3>
-        <div class="service-subtitle">Retro Melodies & Dynamic Hits</div>
-        <p>Performing with a full orchestra band, bringing Kishore Kumar, Mohammed Rafi, and modern Bollywood hits live to gala concerts.</p>
+        <h3>Bollywood Live</h3>
+        <div class="service-subtitle">Retro Melodies, Blockbuster Hits & Live Band</div>
+        <p>Electrifying live Bollywood concerts featuring timeless retro classics, romantic melodies, energetic dance numbers, and celebrity musical galas.</p>
       </div>
     </div>
 
     <div class="glass-card service-card">
       <div class="service-img-wrapper">
-        <img src="{% static 'Lagangeet/main.jpg' %}" alt="Wedding Lagangeet">
+        <img src="{% static 'Vaidik Lagangeet/Photos/w3.jpg' %}" alt="Wedding Songs" loading="lazy" decoding="async">
       </div>
       <div class="service-content">
-        <h3>Sacred Lagangeet</h3>
-        <div class="service-subtitle">Traditional Vaidik Wedding Chants</div>
-        <p>Enhancing royal weddings with soulful Vaidik rituals, Kanya Vidaai, Mandap Mahurat, and joyous Sangeet Sandhya performances.</p>
+        <h3>Wedding Songs</h3>
+        <div class="service-subtitle">Traditional Gujarati Lagangeet, Vaidik Marriage Ritual Chants & Sangeet Sandhya</div>
+        <p>Enhancing royal weddings with soulful Vaidik chants, emotional Hast Melap, Kanya Vidaai, Mandap Mahurat, and joyous Sangeet Sandhya performances.</p>
       </div>
     </div>
 
     <div class="glass-card service-card">
       <div class="service-img-wrapper">
-        <img src="{% static 'International/main.jpg' %}" alt="International Tours">
+        <img src="{% static 'Bhajan/photos/p-1.jpg' %}" alt="Spiritual Music (Bhajan)" loading="lazy" decoding="async">
       </div>
       <div class="service-content">
-        <h3>Global Concerts</h3>
-        <div class="service-subtitle">USA, UK, West Indies & Africa</div>
-        <p>Representing Indian music culture on foreign stages, uniting diaspora communities with nostalgic and energetic live singing.</p>
+        <h3>Spiritual Music (Bhajan)</h3>
+        <div class="service-subtitle">Devotional Sandhya, Soulful Bhajans & Satsang</div>
+        <p>Creating a sublime divine atmosphere with heartfelt Bhajans, devotional hymns, Santvani, and peaceful spiritual sangeet that touches the soul.</p>
       </div>
     </div>
   </div>

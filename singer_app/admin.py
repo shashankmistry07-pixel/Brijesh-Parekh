@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     SingerProfile, PerformanceCategory, GalleryItem, 
-    AudioTrack, ShowEvent, Testimonial, BookingInquiry
+    ShowEvent, Testimonial, BookingInquiry
 )
 
 @admin.register(SingerProfile)
@@ -37,12 +37,6 @@ class GalleryItemAdmin(admin.ModelAdmin):
     list_filter = ('category', 'is_featured')
     search_fields = ('title', 'caption')
 
-@admin.register(AudioTrack)
-class AudioTrackAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'duration', 'is_popular')
-    list_filter = ('category', 'is_popular')
-    search_fields = ('title',)
-
 @admin.register(ShowEvent)
 class ShowEventAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'city_country', 'event_date', 'status')
@@ -56,7 +50,21 @@ class TestimonialAdmin(admin.ModelAdmin):
 
 @admin.register(BookingInquiry)
 class BookingInquiryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'phone', 'event_type', 'event_date', 'status', 'is_read', 'created_at')
+    list_display = ('name', 'email', 'phone', 'event_type', 'event_date', 'location', 'status', 'is_read', 'created_at')
     list_filter = ('status', 'is_read', 'event_type', 'created_at')
     search_fields = ('name', 'email', 'phone', 'subject', 'message', 'location')
     readonly_fields = ('created_at',)
+    list_editable = ('status', 'is_read')
+    actions = ['mark_as_read', 'mark_as_contacted', 'mark_as_confirmed']
+
+    @admin.action(description="Mark selected inquiries as Read")
+    def mark_as_read(self, request, queryset):
+        queryset.update(is_read=True)
+
+    @admin.action(description="Mark selected inquiries as Contacted")
+    def mark_as_contacted(self, request, queryset):
+        queryset.update(status='Contacted', is_read=True)
+
+    @admin.action(description="Mark selected inquiries as Confirmed")
+    def mark_as_confirmed(self, request, queryset):
+        queryset.update(status='Confirmed', is_read=True)

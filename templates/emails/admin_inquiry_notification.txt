@@ -1,0 +1,20 @@
+NEW EVENT BOOKING INQUIRY - BRIJESH PAREKH OFFICIAL
+===================================================
+
+You have received a new booking inquiry through the official website:
+
+Client Name:    {{ inquiry.name }}
+Phone Number:   {{ inquiry.phone }}
+Email Address:  {{ inquiry.email }}
+Event Category: {{ inquiry.event_type }}
+Event Date:     {{ inquiry.event_date|default:"Not specified" }}
+City / Venue:   {{ inquiry.location|default:"Not specified" }}
+Subject:        {{ inquiry.subject }}
+
+Message / Requirements:
+-----------------------
+{{ inquiry.message }}
+
+---------------------------------------------------
+Received on: {{ inquiry.created_at|date:"d M Y, h:i A" }}
+Brijesh Parekh Official Website Management

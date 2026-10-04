@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Page Not Found (404) | Brijesh Parekh{% endblock %}
+
+{% block content %}
+<section class="container" style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: calc(var(--navbar-height) + 3rem); padding-bottom: 5rem;">
+  <div class="glass-card" style="padding: 3.5rem 2.5rem; max-width: 650px; border-radius: 24px; box-shadow: var(--shadow-card);">
+    <div style="font-size: 5rem; font-family: var(--font-heading); line-height: 1; margin-bottom: 1rem;" class="gold-text">404</div>
+    <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-main);">Page Not Found</h2>
+    <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.6;">
+      The musical note you are looking for might have been moved, renamed, or is temporarily unavailable. Let's get you back to the rhythm.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="{% url 'home' %}" class="btn-primary">
+        <i class="fa-solid fa-house"></i> Return to Home
+      </a>
+      <a href="{% url 'contact' %}" class="btn-secondary">
+        <i class="fa-solid fa-envelope"></i> Contact Us
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

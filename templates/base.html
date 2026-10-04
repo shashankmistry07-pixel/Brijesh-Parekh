@@ -5,33 +5,181 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Brijesh Parekh | Playback Singer & Live Performer{% endblock %}</title>
-  <meta name="description" content="Official website of Brijesh Parekh - Sensational Playback Singer and Performer with 4000+ shows across Garba, Bollywood Orchestra, Wedding Lagangeet, and International Concert Tours.">
-  <meta name="keywords" content="Brijesh Parekh, Singer Brijesh Parekh, Gujarati Singer, Playback Singer, Garba Singer, Navratri Garba, Bollywood Orchestra, Lagangeet, Ahmedabad Singer">
   
-  <!-- FontAwesome & Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- SEO Canonical & Search Engine Meta Tags -->
+  <link rel="canonical" href="https://brijesh-parekh.vercel.app{{ request.path }}">
+  <meta name="description" content="Official website of Brijesh Parekh - Sensational Gujarati Playback Singer, Composer & Live Performer with 4000+ shows across Garba, Bollywood Live, Wedding Songs, and Spiritual Music (Bhajan). Book for global concerts and weddings.">
+  <meta name="keywords" content="Brijesh Parekh, Singer Brijesh Parekh, Brijesh Parekh Singer, Gujarati Singer, Playback Singer, Garba Singer, Navratri Garba Singer, Marriage Garba, Bollywood Live Singer, Wedding Songs Singer, Vaidik Lagangeet, Spiritual Bhajan Singer, Ahmedabad Singer, Gujarati Artist, Gujarati Live Performer">
+  <meta name="author" content="Brijesh Parekh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+  <!-- Geo-Targeting & Local SEO (Ahmedabad, Gujarat, India) -->
+  <meta name="geo.region" content="IN-GJ">
+  <meta name="geo.placename" content="Ahmedabad">
+  <meta name="geo.position" content="23.0225;72.5714">
+  <meta name="ICBM" content="23.0225, 72.5714">
+  <meta name="theme-color" content="#f5cf61">
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/jpeg" href="{% static 'pics/solo3.jpg' %}">
+  <link rel="apple-touch-icon" href="{% static 'pics/solo3.jpg' %}">
+
+  <!-- Social Media & Open Graph Meta Tags -->
+  <meta property="og:site_name" content="Brijesh Parekh Official">
+  <meta property="og:title" content="Brijesh Parekh | Sensational Gujarati Playback Singer & Live Performer">
+  <meta property="og:description" content="4000+ shows worldwide across Garba, Bollywood Live, Wedding Songs & Spiritual Music (Bhajan). Official website and booking portal of Singer Brijesh Parekh.">
+  <meta property="og:image" content="https://brijesh-parekh.vercel.app{% static 'pics/solo3.jpg' %}">
+  <meta property="og:image:secure_url" content="https://brijesh-parekh.vercel.app{% static 'pics/solo3.jpg' %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Singer Brijesh Parekh Live on Stage">
+  <meta property="og:url" content="https://brijesh-parekh.vercel.app{{ request.path }}">
+  <meta property="og:type" content="profile">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:locale:alternate" content="gu_IN">
+  
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@thebrijeshparekh">
+  <meta name="twitter:creator" content="@thebrijeshparekh">
+  <meta name="twitter:title" content="Brijesh Parekh | Playback Singer & Performer">
+  <meta name="twitter:description" content="Official website of Singer Brijesh Parekh - 4,000+ shows across Garba, Bollywood Live, Wedding Songs & Spiritual Bhajans.">
+  <meta name="twitter:image" content="https://brijesh-parekh.vercel.app{% static 'pics/solo3.jpg' %}">
+
+  <!-- Preconnect for Performance Optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+  <!-- Typography & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   {% block extra_css %}{% endblock %}
+
+  <!-- Comprehensive JSON-LD Structured Data Schema for Google, Bing & AI Engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Person", "MusicGroup"],
+        "@id": "https://brijesh-parekh.vercel.app/#artist",
+        "name": "Brijesh Parekh",
+        "alternateName": [
+          "Singer Brijesh Parekh",
+          "Brijesh Parekh Singer",
+          "Brijesh Parekh Official",
+          "thebrijeshparekh"
+        ],
+        "jobTitle": "Playback Singer, Composer & Live Concert Performer",
+        "description": "Brijesh Parekh is one of Gujarat's most celebrated playback singers, composers, and live performers with over 22 years of experience and 4,000+ successful shows across India, USA, UK, and worldwide.",
+        "url": "https://brijesh-parekh.vercel.app",
+        "image": "https://brijesh-parekh.vercel.app{% static 'pics/solo3.jpg' %}",
+        "telephone": "+91 95748 05348",
+        "email": "brijesh71090parekh@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ahmedabad",
+          "addressRegion": "Gujarat",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 23.0225,
+          "longitude": 72.5714
+        },
+        "genre": [
+          "Garba",
+          "Gujarati Folk",
+          "Bollywood Retro & Modern Hits",
+          "Wedding Songs & Vaidik Lagangeet",
+          "Spiritual Bhajans & Santvani",
+          "Devotional Sangeet"
+        ],
+        "sameAs": [
+          "https://www.instagram.com/thebrijeshparekh",
+          "https://www.facebook.com/brijeshparekhnight",
+          "https://youtube.com/@brijeshparekhofficial5953",
+          "https://maps.app.goo.gl/x4TiHEh2ehnbZqW7A"
+        ],
+        "knowsAbout": [
+          "Navratri Raas Garba",
+          "Gujarati Playback Singing",
+          "Bollywood Live Orchestra Band",
+          "Vaidik Lagangeet & Wedding Rituals",
+          "Bhakti Sandhya & Santvani",
+          "Stage Performance"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://brijesh-parekh.vercel.app/#website",
+        "url": "https://brijesh-parekh.vercel.app",
+        "name": "Brijesh Parekh Official Website",
+        "description": "Official booking portal and portfolio of Singer Brijesh Parekh",
+        "publisher": {
+          "@id": "https://brijesh-parekh.vercel.app/#artist"
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://brijesh-parekh.vercel.app/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who is Brijesh Parekh?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Brijesh Parekh is a celebrated Gujarati playback singer, composer, and live performer with over 22 years of experience and 4,000+ shows across India, USA, UK, and worldwide."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I book Singer Brijesh Parekh for Garba, Wedding, or Concerts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can book Brijesh Parekh directly by calling +91 95748 05348, emailing brijesh71090parekh@gmail.com, or submitting the inquiry form at https://brijesh-parekh.vercel.app/contact/."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What music categories does Brijesh Parekh perform?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Brijesh Parekh performs 4 signature musical styles: (1) Garba (Navratri & Marriage celebrations), (2) Bollywood Live (Retro & modern orchestra concerts), (3) Wedding Songs (Traditional Gujarati Lagangeet & Sangeet Sandhya), and (4) Spiritual Music (Bhajan Sandhya & Santvani)."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
   <!-- Sticky Glass Navbar -->
-  <header class="navbar-header">
+  <header class="navbar-header" id="mainHeader">
     <div class="container nav-container">
-      <a href="{% url 'home' %}" class="logo-brand">
-        <img src="{% static 'pics/alb61-removebg-preview.png' %}" alt="Brijesh Parekh Singer" onerror="this.src='{% static 'pics/solo3.jpg' %}'">
+      <a href="{% url 'home' %}" class="logo-brand" title="Brijesh Parekh - Home">
+        <img src="{% static 'pics/alb61-removebg-preview.png' %}" alt="Brijesh Parekh Singer" onerror="this.onerror=null; this.src='/static/pics/solo3.jpg';" width="48" height="48">
         <div>
           <div class="brand-title gold-text">Brijesh Parekh</div>
           <div class="brand-subtitle">Playback Singer & Performer</div>
         </div>
       </a>
 
-      <nav class="nav-links">
+      <nav class="nav-links" id="navMenu">
         <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
         <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' or request.resolver_match.url_name == 'profile' %}active{% endif %}">About & Profile</a>
         <a href="{% url 'services' %}" class="{% if request.resolver_match.url_name == 'services' or request.resolver_match.url_name == 'category_detail' %}active{% endif %}">Performances</a>
         <a href="{% url 'gallery' %}" class="{% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">Gallery</a>
-        <a href="{% url 'music' %}" class="{% if request.resolver_match.url_name == 'music' %}active{% endif %}">Music</a>
+        <a href="{% url 'music' %}" class="{% if request.resolver_match.url_name == 'music' %}active{% endif %}">Video Tracks</a>
         <a href="{% url 'events' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Shows & Events</a>
         <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
       </nav>
@@ -40,16 +188,16 @@
         <a href="tel:{{ singer_profile.phone_primary }}" class="btn-primary btn-call" title="Call Brijesh Parekh">
           <i class="fa-solid fa-phone"></i> <span>{{ singer_profile.phone_primary }}</span>
         </a>
-        <div class="mobile-toggle">
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
           <i class="fa-solid fa-bars"></i>
-        </div>
+        </button>
       </div>
     </div>
   </header>
 
   <!-- Django Messages Container -->
   {% if messages %}
-    <div class="container" style="margin-top: calc(var(--navbar-height) + 1rem); z-index: 10;">
+    <div class="container" style="margin-top: calc(var(--navbar-height) + 1.2rem); position: relative; z-index: 100;">
       {% for message in messages %}
         <div class="alert-toast {{ message.tags }}">
           <i class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% else %}fa-circle-exclamation{% endif %}"></i>
@@ -60,49 +208,25 @@
   {% endif %}
 
   <!-- Main Content Block -->
-  <main>
+  <main id="mainContent">
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Sticky Bottom Music Player Bar -->
-  <div class="sticky-music-bar">
-    <div class="bar-container">
-      <div class="now-playing-info">
-        <img id="nowPlayingCover" src="{% static 'pics/solo3.jpg' %}" alt="Song Cover">
-        <div class="now-playing-text">
-          <h4 id="nowPlayingTitle">Ranglo Non-Stop Garba</h4>
-          <p id="nowPlayingSub">Brijesh Parekh Live</p>
-        </div>
-      </div>
-
-      <div class="player-controls">
-        <div class="control-buttons">
-          <button class="btn-player"><i class="fa-solid fa-backward-step"></i></button>
-          <button class="btn-player btn-play-main" id="mainPlayBtn"><i class="fa-solid fa-play"></i></button>
-          <button class="btn-player"><i class="fa-solid fa-forward-step"></i></button>
-        </div>
-        <div class="progress-container">
-          <span class="time-stamp" id="currentTime">0:00</span>
-          <div class="progress-bar" id="playerProgressBar">
-            <div class="progress-fill" id="playerProgressFill"></div>
-          </div>
-          <span class="time-stamp" id="totalTime">0:00</span>
-        </div>
-      </div>
-
-      <div style="text-align: right; display: flex; align-items: center; justify-content: flex-end; gap: 1rem;">
-        <a href="{% url 'music' %}" class="btn-secondary" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
-          <i class="fa-solid fa-music"></i> All Songs
-        </a>
-      </div>
-    </div>
-  </div>
+  <!-- Floating Quick Action Buttons (WhatsApp & Back to Top) -->
+  <aside class="floating-actions">
+    <a href="https://wa.me/919574805348?text=Hello%20Brijesh%20Parekh%20Team,%20I%20would%20like%20to%20inquire%20about%20booking%20dates%20for%20an%20event." target="_blank" rel="noopener noreferrer" class="float-btn float-whatsapp" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <button class="float-btn float-top" id="backToTopBtn" title="Back to top" aria-label="Back to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+  </aside>
 
   <!-- Lightbox Modal -->
-  <div class="lightbox-modal" id="lightboxModal">
-    <span class="lightbox-close" id="lightboxClose">&times;</span>
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Image Preview">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close modal">&times;</button>
     <div class="lightbox-content">
-      <img id="lightboxImg" src="" alt="Gallery Preview">
+      <img id="lightboxImg" src="" alt="Gallery Preview" loading="lazy">
     </div>
   </div>
 
@@ -118,10 +242,10 @@
         </div>
         <p>{{ singer_profile.bio_short }}</p>
         <div class="social-links-flex" style="margin-top: 1.5rem;">
-          <a href="{{ singer_profile.facebook_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="{{ singer_profile.instagram_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-instagram"></i></a>
-          <a href="{{ singer_profile.youtube_url }}" target="_blank" class="social-icon-btn"><i class="fa-brands fa-youtube"></i></a>
-          <a href="{{ singer_profile.google_maps_url }}" target="_blank" class="social-icon-btn"><i class="fa-solid fa-location-dot"></i></a>
+          <a href="{{ singer_profile.facebook_url }}" target="_blank" rel="noopener" class="social-icon-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="{{ singer_profile.instagram_url }}" target="_blank" rel="noopener" class="social-icon-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="{{ singer_profile.youtube_url }}" target="_blank" rel="noopener" class="social-icon-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="{{ singer_profile.google_maps_url }}" target="_blank" rel="noopener" class="social-icon-btn" aria-label="Google Maps"><i class="fa-solid fa-location-dot"></i></a>
         </div>
       </div>
 
@@ -140,7 +264,7 @@
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'about' %}">About Brijesh Parekh</a></li>
           <li><a href="{% url 'gallery' %}">Photo Gallery</a></li>
-          <li><a href="{% url 'music' %}">Audio Tracks</a></li>
+          <li><a href="{% url 'music' %}">Video Tracks</a></li>
           <li><a href="{% url 'events' %}">Tour Schedule</a></li>
           <li><a href="{% url 'contact' %}">Book Event</a></li>
           <li><a href="/admin/" target="_blank">Admin Portal</a></li>
@@ -150,20 +274,20 @@
       <div class="footer-col">
         <h4>Direct Contact</h4>
         <ul>
-          <li><i class="fa-solid fa-phone gold-text"></i> {{ singer_profile.phone_primary }}</li>
-          <li><i class="fa-solid fa-phone gold-text"></i> {{ singer_profile.phone_secondary }}</li>
-          <li><i class="fa-solid fa-envelope gold-text"></i> {{ singer_profile.email }}</li>
+          <li><i class="fa-solid fa-phone gold-text"></i> <a href="tel:{{ singer_profile.phone_primary }}">{{ singer_profile.phone_primary }}</a></li>
+          {% if singer_profile.phone_secondary %}<li><i class="fa-solid fa-phone gold-text"></i> <a href="tel:{{ singer_profile.phone_secondary }}">{{ singer_profile.phone_secondary }}</a></li>{% endif %}
+          <li><i class="fa-solid fa-envelope gold-text"></i> <a href="mailto:{{ singer_profile.email }}">{{ singer_profile.email }}</a></li>
           <li><i class="fa-solid fa-location-dot gold-text"></i> {{ singer_profile.address }}</li>
         </ul>
       </div>
     </div>
 
     <div class="container footer-bottom">
-      <p>&copy; {% now "Y" %} Brijesh Parekh Official Website. All Rights Reserved. Designed & Powered by Silverstar Django Project.</p>
+      <p>&copy; {% now "Y" %} Brijesh Parekh Official Website. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/main.js' %}" defer></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

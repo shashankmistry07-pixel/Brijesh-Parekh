@@ -1,5 +1,4 @@
-echo "Building project..."
-python3 -m pip install -r requirements.txt --break-system-packages
-
+echo "Building project for production..."
+python3 -m pip install -r requirements.txt
 python3 manage.py collectstatic --noinput --clear
-echo "Build complete."
+echo "Static build complete."
