@@ -1,6 +1,6 @@
 *.ARW
 *.heic
 *.HEIC
-staticfiles_build
 .git
 .vscode
+
