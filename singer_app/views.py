@@ -10,6 +10,8 @@ from .models import (
 )
 from .emails import send_inquiry_emails
 
+MISSING_GALLERY_IMAGE_PATH = "Vaidik Lagangeet/main.jpg"
+
 def home_view(request):
     """
     Optimized homepage view fetching featured media, performance categories,
@@ -21,7 +23,7 @@ def home_view(request):
     # Query photos with category pre-joined
     all_photos = GalleryItem.objects.select_related('category').exclude(
         Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
-    )
+    ).exclude(image_path=MISSING_GALLERY_IMAGE_PATH)
     featured_gallery = list(all_photos.filter(is_featured=True)[:8])
     if not featured_gallery:
         featured_gallery = list(all_photos[:8])
@@ -88,7 +90,7 @@ def category_detail_view(request, slug):
     # Strictly separate photos and videos for this category
     category_photos = category.gallery_items.exclude(
         Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
-    )
+    ).exclude(image_path=MISSING_GALLERY_IMAGE_PATH)
     category_videos = category.gallery_items.filter(
         Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
     )
@@ -112,7 +114,7 @@ def gallery_view(request):
     
     photos = GalleryItem.objects.select_related('category').exclude(
         Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
-    )
+    ).exclude(image_path=MISSING_GALLERY_IMAGE_PATH)
     
     if selected_slug and selected_slug != 'all':
         items = photos.filter(category__slug=selected_slug)

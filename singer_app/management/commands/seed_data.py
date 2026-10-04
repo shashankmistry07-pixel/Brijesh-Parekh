@@ -162,7 +162,6 @@ class Command(BaseCommand):
             ('Vaidik Lagangeet/Photos/w11.jpg', 'Wedding Sangeet Sandhya Beats', categories['wedding'], False),
             ('Vaidik Lagangeet/Photos/w12.jpg', 'Joyous Marriage Celebrations', categories['wedding'], False),
             ('Vaidik Lagangeet/Photos/w13.jpg', 'Brijesh Parekh Live Wedding Recital', categories['wedding'], False),
-            ('Vaidik Lagangeet/main.jpg', 'Vaidik Lagangeet Grand Stage', categories['wedding'], True),
             ('pics/group_photo.JPG', 'Brijesh Parekh Wedding Troupe', categories['wedding'], True),
             ('pics/IMG_2481.jpg', 'Brijesh Parekh Event Portrait', categories['wedding'], False),
             # Vaidik Lagangeet Videos (5 videos including w-4.MP4 & w-5.MOV)
