@@ -60,28 +60,28 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="contact_name">Full Name *</label>
-            <input type="text" id="contact_name" name="name" class="form-control" placeholder="e.g. Swati Patel" required autocomplete="name">
+            <input type="text" id="contact_name" name="name" class="form-control" value="{{ form_data.name|default:'' }}" placeholder="e.g. Swati Patel" minlength="2" maxlength="60" pattern="^[a-zA-Z\s.'-]+$" title="Please enter a valid name (letters and spaces only)" required autocomplete="name">
           </div>
           <div class="form-group">
             <label class="form-label" for="contact_email">Email Address *</label>
-            <input type="email" id="contact_email" name="email" class="form-control" placeholder="e.g. swati@example.com" required autocomplete="email">
+            <input type="email" id="contact_email" name="email" class="form-control" value="{{ form_data.email|default:'' }}" placeholder="e.g. swati@example.com" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address (e.g. name@domain.com)" maxlength="80" required autocomplete="email">
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="contact_phone">Phone Number *</label>
-            <input type="tel" id="contact_phone" name="phone" class="form-control" placeholder="e.g. +91 95748 05348" required autocomplete="tel">
+            <label class="form-label" for="contact_phone">Phone Number (10 Digits) *</label>
+            <input type="tel" id="contact_phone" name="phone" class="form-control" value="{{ form_data.phone|default:'' }}" placeholder="e.g. 9876543210" pattern="^(\+?91[\-\s]?)?[0]?[6-9]\d{9}$" minlength="10" maxlength="15" required autocomplete="tel" title="Please enter a valid 10-digit mobile number (e.g. 9876543210)">
           </div>
           <div class="form-group">
             <label class="form-label" for="contact_event_type">Event Category *</label>
             <select id="contact_event_type" name="event_type" class="form-control">
-              <option value="Garba">Garba</option>
-              <option value="Bollywood Live">Bollywood Live Concert</option>
-              <option value="Wedding Songs">Wedding Songs & Sangeet</option>
-              <option value="Spiritual Music (Bhajan)">Spiritual Music (Bhajan)</option>
-              <option value="Corporate / Gala Event">Corporate / Gala Event</option>
-              <option value="Other Special Occasion">Other Special Occasion</option>
+              <option value="Garba" {% if form_data.event_type == 'Garba' %}selected{% endif %}>Garba</option>
+              <option value="Bollywood Live" {% if form_data.event_type == 'Bollywood Live' %}selected{% endif %}>Bollywood Live Concert</option>
+              <option value="Wedding Songs" {% if form_data.event_type == 'Wedding Songs' %}selected{% endif %}>Wedding Songs & Sangeet</option>
+              <option value="Spiritual Music (Bhajan)" {% if form_data.event_type == 'Spiritual Music (Bhajan)' %}selected{% endif %}>Spiritual Music (Bhajan)</option>
+              <option value="Corporate / Gala Event" {% if form_data.event_type == 'Corporate / Gala Event' %}selected{% endif %}>Corporate / Gala Event</option>
+              <option value="Other Special Occasion" {% if form_data.event_type == 'Other Special Occasion' %}selected{% endif %}>Other Special Occasion</option>
             </select>
           </div>
         </div>
@@ -89,22 +89,22 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="contact_date">Event Date</label>
-            <input type="date" id="contact_date" name="event_date" class="form-control">
+            <input type="date" id="contact_date" name="event_date" class="form-control" value="{{ form_data.event_date|default:'' }}">
           </div>
           <div class="form-group">
             <label class="form-label" for="contact_location">City / Venue</label>
-            <input type="text" id="contact_location" name="location" class="form-control" placeholder="e.g. Ahmedabad, Gujarat">
+            <input type="text" id="contact_location" name="location" class="form-control" value="{{ form_data.location|default:'' }}" placeholder="e.g. Ahmedabad, Gujarat" maxlength="100">
           </div>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="contact_subject">Subject</label>
-          <input type="text" id="contact_subject" name="subject" class="form-control" placeholder="e.g. Navratri Garba 2026 Booking">
+          <input type="text" id="contact_subject" name="subject" class="form-control" value="{{ form_data.subject|default:'' }}" placeholder="e.g. Navratri Garba 2026 Booking" maxlength="150">
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="contact_message">Detailed Requirements *</label>
-          <textarea id="contact_message" name="message" class="form-control" placeholder="Please provide details on your event date, timing, crowd size, special requests..." required></textarea>
+          <label class="form-label" for="contact_message">Detailed Requirements * (Min. 10 characters)</label>
+          <textarea id="contact_message" name="message" class="form-control" minlength="10" maxlength="2000" placeholder="Please provide details on your event date, timing, crowd size, special requests..." required>{{ form_data.message|default:'' }}</textarea>
         </div>
 
         <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">

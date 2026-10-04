@@ -167,10 +167,53 @@ def events_view(request):
     return render(request, 'events.html', {'upcoming_events': upcoming, 'past_events': past})
 
 
+import re
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+NAME_REGEX = re.compile(r"^[a-zA-Z\s.'-]+$")
+
+def is_valid_name(name):
+    """Checks that name is at least 2 characters and contains only letters and basic punctuation."""
+    if not name or len(name.strip()) < 2 or len(name.strip()) > 70:
+        return False
+    return bool(NAME_REGEX.match(name.strip()))
+
+def is_valid_email(email):
+    """Strict email format validation with DNS/format sanity check."""
+    if not email or len(email) > 100 or not EMAIL_REGEX.match(email.strip()):
+        return False
+    try:
+        validate_email(email.strip())
+        return True
+    except ValidationError:
+        return False
+
+def is_valid_phone(phone_str):
+    """
+    Validates mobile number: supports 10-digit Indian numbers (starting with 6-9),
+    with optional +91 or 0 prefix, and 10-15 digit international numbers.
+    """
+    if not phone_str:
+        return False
+    digits = re.sub(r'\D', '', phone_str)
+    if len(digits) == 10:
+        return bool(re.match(r'^[6-9]\d{9}$', digits))
+    elif len(digits) == 11 and digits.startswith('0'):
+        return bool(re.match(r'^[6-9]\d{9}$', digits[1:]))
+    elif len(digits) == 12 and digits.startswith('91'):
+        return bool(re.match(r'^[6-9]\d{9}$', digits[2:]))
+    elif 10 <= len(digits) <= 15:
+        return True
+    return False
+
+
 def contact_view(request):
     """
-    Contact and booking inquiry page with POST handler.
+    Contact and booking inquiry page with POST handler and full input validation.
     """
+    form_data = {}
     if request.method == 'POST':
         name = request.POST.get('name', '').strip()
         email = request.POST.get('email', '').strip()
@@ -181,14 +224,28 @@ def contact_view(request):
         subject = request.POST.get('subject', '').strip()
         message = request.POST.get('message', '').strip()
 
+        form_data = request.POST.dict()
+
         event_date_val = None
         if event_date_str:
             try:
                 event_date_val = date.fromisoformat(event_date_str)
             except ValueError:
-                pass
+                event_date_val = None
 
-        if name and email and phone and message:
+        if not name or not email or not phone or not message:
+            messages.error(request, "Please fill in all required fields (Name, Email, Phone, Message).")
+        elif not is_valid_name(name):
+            messages.error(request, "Please enter a valid full name (letters and spaces only).")
+        elif not is_valid_email(email):
+            messages.error(request, "Please enter a valid email address (e.g. yourname@example.com).")
+        elif not is_valid_phone(phone):
+            messages.error(request, "Please enter a valid 10-digit mobile number (e.g. 9876543210).")
+        elif len(message) < 10:
+            messages.error(request, "Please provide at least 10 characters detailing your event requirements.")
+        elif event_date_val and event_date_val < date.today():
+            messages.error(request, "Event date cannot be in the past. Please select an upcoming date.")
+        else:
             inquiry = BookingInquiry.objects.create(
                 name=name,
                 email=email,
@@ -207,17 +264,15 @@ def contact_view(request):
                 f"Thank you {name}! Your booking inquiry has been received. A confirmation email has been sent to {email}, and Brijesh Parekh's management team will contact you shortly."
             )
             return redirect('contact')
-        else:
-            messages.error(request, "Please fill in all required fields (Name, Email, Phone, Message).")
 
     profile = SingerProfile.objects.first()
-    return render(request, 'contact.html', {'profile': profile})
+    return render(request, 'contact.html', {'profile': profile, 'form_data': form_data})
 
 
 @require_POST
 def submit_inquiry_ajax(request):
     """
-    Asynchronous AJAX booking inquiry handler with input validation.
+    Asynchronous AJAX booking inquiry handler with strict input validation.
     """
     name = request.POST.get('name', '').strip()
     email = request.POST.get('email', '').strip()
@@ -234,10 +289,39 @@ def submit_inquiry_ajax(request):
             'message': 'Please fill in all required fields (Name, Email, Phone, Message).'
         }, status=400)
 
+    if not is_valid_name(name):
+        return JsonResponse({
+            'success': False, 
+            'message': 'Please enter a valid full name (letters and spaces only).'
+        }, status=400)
+
+    if not is_valid_email(email):
+        return JsonResponse({
+            'success': False, 
+            'message': 'Please enter a valid email address (e.g. yourname@example.com).'
+        }, status=400)
+
+    if not is_valid_phone(phone):
+        return JsonResponse({
+            'success': False, 
+            'message': 'Please enter a valid 10-digit mobile number (e.g. 9876543210).'
+        }, status=400)
+
+    if len(message) < 10:
+        return JsonResponse({
+            'success': False, 
+            'message': 'Please provide at least 10 characters detailing your event requirements.'
+        }, status=400)
+
     event_date_val = None
     if event_date_str:
         try:
             event_date_val = date.fromisoformat(event_date_str)
+            if event_date_val < date.today():
+                return JsonResponse({
+                    'success': False, 
+                    'message': 'Event date cannot be in the past. Please select an upcoming date.'
+                }, status=400)
         except ValueError:
             pass
 

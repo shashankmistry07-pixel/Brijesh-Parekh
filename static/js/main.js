@@ -159,13 +159,101 @@ function initGalleryLightbox() {
   });
 }
 
-/* Asynchronous AJAX Form Submission */
+/* Asynchronous AJAX Form Submission & Comprehensive Validation */
+function validatePhoneNumber(phone) {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length === 10) {
+    return /^[6-9]\d{9}$/.test(digits);
+  } else if (digits.length === 11 && digits.startsWith('0')) {
+    return /^[6-9]\d{9}$/.test(digits.slice(1));
+  } else if (digits.length === 12 && digits.startsWith('91')) {
+    return /^[6-9]\d{9}$/.test(digits.slice(2));
+  } else if (digits.length >= 10 && digits.length <= 15) {
+    return true;
+  }
+  return false;
+}
+
+function validateEmailAddress(email) {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.trim());
+}
+
+function validateFullName(name) {
+  return /^[a-zA-Z\s.'-]{2,70}$/.test(name.trim());
+}
+
 function initAjaxBookingForm() {
   const form = document.getElementById('bookingInquiryForm');
   const toastContainer = document.getElementById('formToastContainer');
 
+  // Restrict date fields from selecting past dates
+  const todayDateStr = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(input => {
+    input.setAttribute('min', todayDateStr);
+  });
+
+  // Input filter for phone fields across the site
+  document.querySelectorAll('input[type="tel"], input[name="phone"]').forEach(input => {
+    input.addEventListener('input', (e) => {
+      // Allow only numbers, +, space, and hyphen
+      e.target.value = e.target.value.replace(/[^0-9+\s-]/g, '');
+    });
+  });
+
   if (form) {
     form.addEventListener('submit', (e) => {
+      const nameInput = form.querySelector('input[name="name"]');
+      const emailInput = form.querySelector('input[name="email"]');
+      const phoneInput = form.querySelector('input[name="phone"]');
+      const messageInput = form.querySelector('textarea[name="message"]');
+      const dateInput = form.querySelector('input[name="event_date"]');
+
+      const showError = (msg, inputElement) => {
+        e.preventDefault();
+        if (toastContainer) {
+          toastContainer.innerHTML = `
+            <div class="alert-toast error">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>${msg}</span>
+            </div>
+          `;
+          toastContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          alert(msg);
+        }
+        if (inputElement) inputElement.focus();
+      };
+
+      // 1. Name validation
+      if (nameInput && !validateFullName(nameInput.value)) {
+        showError('Please enter a valid full name (letters and spaces only, min 2 characters).', nameInput);
+        return;
+      }
+
+      // 2. Email validation
+      if (emailInput && !validateEmailAddress(emailInput.value)) {
+        showError('Please enter a valid email address (e.g. name@example.com).', emailInput);
+        return;
+      }
+
+      // 3. Phone validation
+      if (phoneInput && !validatePhoneNumber(phoneInput.value.trim())) {
+        showError('Please enter a valid 10-digit mobile number (e.g. 9876543210).', phoneInput);
+        return;
+      }
+
+      // 4. Event Date validation (cannot be in past)
+      if (dateInput && dateInput.value && dateInput.value < todayDateStr) {
+        showError('Event date cannot be in the past. Please select an upcoming date.', dateInput);
+        return;
+      }
+
+      // 5. Message validation (min 10 chars)
+      if (messageInput && messageInput.value.trim().length < 10) {
+        showError('Please provide at least 10 characters detailing your event requirements.', messageInput);
+        return;
+      }
+
       // If form doesn't have an action to standard POST, handle via AJAX
       if (!form.hasAttribute('action') || form.getAttribute('action') === '') {
         e.preventDefault();

@@ -283,18 +283,18 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="home_name">Your Full Name *</label>
-            <input type="text" id="home_name" name="name" class="form-control" placeholder="e.g. Rahul Patel" required autocomplete="name">
+            <input type="text" id="home_name" name="name" class="form-control" placeholder="e.g. Rahul Patel" minlength="2" maxlength="60" pattern="^[a-zA-Z\s.'-]+$" title="Please enter a valid name (letters and spaces only)" required autocomplete="name">
           </div>
           <div class="form-group">
             <label class="form-label" for="home_email">Your Email *</label>
-            <input type="email" id="home_email" name="email" class="form-control" placeholder="e.g. rahul@example.com" required autocomplete="email">
+            <input type="email" id="home_email" name="email" class="form-control" placeholder="e.g. rahul@example.com" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address (e.g. name@domain.com)" maxlength="80" required autocomplete="email">
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="home_phone">Phone Number *</label>
-            <input type="tel" id="home_phone" name="phone" class="form-control" placeholder="e.g. +91 95748 05348" required autocomplete="tel">
+            <label class="form-label" for="home_phone">Phone Number (10 Digits) *</label>
+            <input type="tel" id="home_phone" name="phone" class="form-control" placeholder="e.g. 9876543210" pattern="^(\+?91[\-\s]?)?[0]?[6-9]\d{9}$" minlength="10" maxlength="15" required autocomplete="tel" title="Please enter a valid 10-digit mobile number (e.g. 9876543210)">
           </div>
           <div class="form-group">
             <label class="form-label" for="home_event_type">Event Type *</label>
@@ -316,18 +316,18 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="home_loc">Location / City</label>
-            <input type="text" id="home_loc" name="location" class="form-control" placeholder="e.g. Ahmedabad, Mumbai, London">
+            <input type="text" id="home_loc" name="location" class="form-control" placeholder="e.g. Ahmedabad, Mumbai, London" maxlength="100">
           </div>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="home_subject">Subject</label>
-          <input type="text" id="home_subject" name="subject" class="form-control" placeholder="e.g. Inquiry for Navratri Garba 2026">
+          <input type="text" id="home_subject" name="subject" class="form-control" placeholder="e.g. Inquiry for Navratri Garba 2026" maxlength="150">
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="home_message">Your Message / Requirements *</label>
-          <textarea id="home_message" name="message" class="form-control" placeholder="Tell us about your event details, expected crowd size, venue, and special song requests..." required></textarea>
+          <label class="form-label" for="home_message">Your Message / Requirements * (Min. 10 characters)</label>
+          <textarea id="home_message" name="message" class="form-control" minlength="10" maxlength="2000" placeholder="Tell us about your event details, expected crowd size, venue, and special song requests..." required></textarea>
         </div>
 
         <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">
