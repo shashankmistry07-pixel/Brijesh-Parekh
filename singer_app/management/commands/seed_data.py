@@ -164,11 +164,10 @@ class Command(BaseCommand):
             ('Vaidik Lagangeet/Photos/w13.jpg', 'Brijesh Parekh Live Wedding Recital', categories['wedding'], False),
             ('pics/group_photo.JPG', 'Brijesh Parekh Wedding Troupe', categories['wedding'], True),
             ('pics/IMG_2481.jpg', 'Brijesh Parekh Event Portrait', categories['wedding'], False),
-            # Vaidik Lagangeet Videos (5 videos including w-4.MP4 & w-5.MOV)
+            # Vaidik Lagangeet Videos
             ('Vaidik Lagangeet/video/w1.MOV', 'Sacred Vaidik Lagangeet & Mangal Fera', categories['wedding'], True),
             ('Vaidik Lagangeet/video/w2.MOV', 'Emotional Hast Melap & Kanya Vidaai', categories['wedding'], True),
             ('Vaidik Lagangeet/video/w3.MOV', 'Royal Wedding Sangeet Sandhya Live', categories['wedding'], True),
-            ('Vaidik Lagangeet/video/w-4.MP4', 'Traditional Mandap Mahurat & Lagangeet Live', categories['wedding'], True),
             ('Vaidik Lagangeet/video/w-5.MOV', 'Grand Wedding Celebrations & Sangeet Melodies', categories['wedding'], True),
 
             # Spiritual Music (Bhajan) Photos (from static/Bhajan/photos)

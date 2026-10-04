@@ -10,7 +10,10 @@ from .models import (
 )
 from .emails import send_inquiry_emails
 
-MISSING_GALLERY_IMAGE_PATH = "Vaidik Lagangeet/main.jpg"
+UNAVAILABLE_GALLERY_MEDIA_PATHS = (
+    "Vaidik Lagangeet/main.jpg",
+    "Vaidik Lagangeet/video/w-4.MP4",
+)
 
 def home_view(request):
     """
@@ -23,7 +26,7 @@ def home_view(request):
     # Query photos with category pre-joined
     all_photos = GalleryItem.objects.select_related('category').exclude(
         Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
-    ).exclude(image_path=MISSING_GALLERY_IMAGE_PATH)
+    ).exclude(image_path__in=UNAVAILABLE_GALLERY_MEDIA_PATHS)
     featured_gallery = list(all_photos.filter(is_featured=True)[:8])
     if not featured_gallery:
         featured_gallery = list(all_photos[:8])
@@ -32,7 +35,7 @@ def home_view(request):
     popular_videos = list(
         GalleryItem.objects.select_related('category').filter(
             Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
-        ).order_by('category__display_order', 'id')[:8]
+        ).exclude(image_path__in=UNAVAILABLE_GALLERY_MEDIA_PATHS).order_by('category__display_order', 'id')[:8]
     )
     
     # Upcoming live shows
@@ -90,10 +93,10 @@ def category_detail_view(request, slug):
     # Strictly separate photos and videos for this category
     category_photos = category.gallery_items.exclude(
         Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
-    ).exclude(image_path=MISSING_GALLERY_IMAGE_PATH)
+    ).exclude(image_path__in=UNAVAILABLE_GALLERY_MEDIA_PATHS)
     category_videos = category.gallery_items.filter(
         Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
-    )
+    ).exclude(image_path__in=UNAVAILABLE_GALLERY_MEDIA_PATHS)
     events = category.events.filter(status='Upcoming', event_date__gte=date.today()).order_by('event_date')
     
     context = {
@@ -114,7 +117,7 @@ def gallery_view(request):
     
     photos = GalleryItem.objects.select_related('category').exclude(
         Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
-    ).exclude(image_path=MISSING_GALLERY_IMAGE_PATH)
+    ).exclude(image_path__in=UNAVAILABLE_GALLERY_MEDIA_PATHS)
     
     if selected_slug and selected_slug != 'all':
         items = photos.filter(category__slug=selected_slug)
@@ -138,7 +141,7 @@ def music_view(request):
     
     videos_qs = GalleryItem.objects.select_related('category').filter(
         Q(image_path__iendswith='.mp4') | Q(image_path__iendswith='.mov')
-    )
+    ).exclude(image_path__in=UNAVAILABLE_GALLERY_MEDIA_PATHS)
     if selected_slug and selected_slug != 'all':
         videos_qs = videos_qs.filter(category__slug=selected_slug)
         
